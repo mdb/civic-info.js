@@ -1,0 +1,24 @@
+{
+  "name": "nyt",
+  "description": "A thin wrapper for the Google Civic Info API.",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "0.8.10",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+    "request": "*",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "nock": "*",
+    "expect.js": "*",
+    "grunt": ">=0.3.16",
+    "grunt-simple-mocha": ">=0.2.0"
+  },
+  "scripts": {
+    "test": "grunt --verbose"
+  }
+}
