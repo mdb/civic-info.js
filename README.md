@@ -19,7 +19,6 @@ Require and instantiate civic-info.js with your API key:
     var civicInfo = require("civic-info")({apiKey: 'YOUR KEY HERE'});
 
     // Alternatively, you can set a GOOGLE_API_KEY environment variable and instantiate like so:
-
     var civicInfo = require("civic-info")();
 
 ## Example Usage
