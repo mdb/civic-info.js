@@ -24,16 +24,20 @@ CivicInfo.prototype.voterInfo = function (opts, callback) {
     electionID: '4000'
   });
 
-  request.post(
-    {
-      url: buildRequestURL('voterinfo/' + options.electionID + '/lookup') + '?key='+ this.settings.apiKey,
-      body: JSON.stringify({address: options.address}),
-      headers: {'Content-Type': 'application/json'}
-    },
-    function (error, response, body) {
-      callback(body);
-    }
-  );
+  if (!options.address) {
+    throw new Error("You must specify an address");
+  } else {
+    request.post(
+      {
+        url: buildRequestURL('voterinfo/' + options.electionID + '/lookup') + '?key='+ this.settings.apiKey,
+        body: JSON.stringify({address: options.address}),
+        headers: {'Content-Type': 'application/json'}
+      },
+      function (error, response, body) {
+        callback(JSON.parse(body));
+      }
+    );
+  }
 };
 
 module.exports = function(opts) {

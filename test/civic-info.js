@@ -54,5 +54,47 @@ describe("CivicInfo", function() {
       civicInfo = require('../civic-info')();
       expect(typeof civicInfo.voterInfo).to.eql('function');
     });
+
+    it("makes the properly formatted post to the Google Civic Info API with the options it's passed", function (done) {
+      civicInfo = require('../civic-info')({apiKey: 'Foo'});
+      var addr = 'fakeAddress';
+      var fakeResp = {"fakeKey":"fakeVal"};
+
+      nock('https://www.googleapis.com')
+        .post('/civicinfo/us_v1/voterinfo/fakeElectionID/lookup?key=Foo', {'address': addr})
+        .reply(200, fakeResp);
+
+      civicInfo.voterInfo({address: addr, electionID: 'fakeElectionID'}, function (data) {
+        expect(data).to.eql(fakeResp);
+        done();
+      });
+    });
+
+    context("no electionID is specified in the options object it's passed", function () {
+      it("defaults to an electionID of '4000'", function (done) {
+        civicInfo = require('../civic-info')({apiKey: 'Foo'});
+        var addr = 'fakeAddress';
+        var fakeResp = {"fakeKey":"fakeVal"};
+
+        nock('https://www.googleapis.com')
+          .post('/civicinfo/us_v1/voterinfo/4000/lookup?key=Foo', {'address': addr})
+          .reply(200, fakeResp);
+
+        civicInfo.voterInfo({address: addr}, function (data) {
+          expect(data).to.eql(fakeResp);
+          done();
+        });
+      });
+    });
+
+    context("no address is specified in the options object it's passed", function () {
+      it("throws an error", function (done) {
+        civicInfo = require('../civic-info')();
+        expect(function () {
+          civicInfo.voterID({}, function(data) {});
+        }).to.throwError();
+        done();
+      });
+    });
   });
 });
