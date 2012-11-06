@@ -3,7 +3,7 @@
   "description": "A thin wrapper for the Google Civic Info API.",
   "homepage": "http://github.com/mdb/civic-info.js",
   "author": "Mike Ball",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "node": "0.8.10",
     "npm": "1.1.x"
