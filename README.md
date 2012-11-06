@@ -25,6 +25,8 @@ Require and instantiate civic-info.js with your API key:
 
 ### Elections
 
+Get election info and election IDs:
+
     civicInfo.elections(function(data) {
       console.log(data);
     });
@@ -37,7 +39,7 @@ Get 2012 presidential election info for a voter address:
       console.log(data);
     });
 
-Get election info related some to a specific election:
+Get election info related to a specific election and address:
 
     // NOTE: electionIDs can be retrieved from the elections API
     civicInfo.voterInfo({electionID: 'SOME ID', address: 'SOME ADDRESS'}, function(data) {
