@@ -4,6 +4,11 @@
   "homepage": "http://github.com/mdb/civic-info.js",
   "author": "Mike Ball",
   "version": "0.0.2",
+  "main": "./civic-info",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/mdb/civic-info.js.git",
+  },
   "engines": {
     "node": "0.8.10",
     "npm": "1.1.x"
