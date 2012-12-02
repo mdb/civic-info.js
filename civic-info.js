@@ -15,6 +15,7 @@ CivicInfo.prototype.elections = function (callback) {
   };
 
   request(buildRequestURL('elections'), {qs: options}, function (error, response, body) {
+    if (error) return callback(error);
     callback(JSON.parse(body));
   });
 };
@@ -34,6 +35,7 @@ CivicInfo.prototype.voterInfo = function (opts, callback) {
         headers: {'Content-Type': 'application/json'}
       },
       function (error, response, body) {
+        if (error) return callback(error);
         callback(JSON.parse(body));
       }
     );
