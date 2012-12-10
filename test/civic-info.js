@@ -43,7 +43,7 @@ describe("CivicInfo", function() {
         .get("/civicinfo/us_v1/elections?key=Foo")
         .reply(200, fakeResp);
       
-      civicInfo.elections(function (data) {
+      civicInfo.elections(function (err, data) {
         expect(data).to.eql(fakeResp);
         done();
       });
@@ -65,7 +65,7 @@ describe("CivicInfo", function() {
         .post("/civicinfo/us_v1/voterinfo/fakeElectionID/lookup?key=Foo", {address: addr})
         .reply(200, fakeResp);
 
-      civicInfo.voterInfo({address: addr, electionID: "fakeElectionID"}, function (data) {
+      civicInfo.voterInfo({address: addr, electionID: "fakeElectionID"}, function (err, data) {
         expect(data).to.eql(fakeResp);
         done();
       });
@@ -81,7 +81,7 @@ describe("CivicInfo", function() {
           .post("/civicinfo/us_v1/voterinfo/4000/lookup?key=Foo", {address: addr})
           .reply(200, fakeResp);
 
-        civicInfo.voterInfo({address: addr}, function (data) {
+        civicInfo.voterInfo({address: addr}, function (err, data) {
           expect(data).to.eql(fakeResp);
           done();
         });
@@ -92,7 +92,7 @@ describe("CivicInfo", function() {
       it("throws an error", function (done) {
         civicInfo = require("../civic-info")();
         expect(function () {
-          civicInfo.voterID({}, function(data) {});
+          civicInfo.voterID({}, function(err, data) {});
         }).to.throwError();
         done();
       });
