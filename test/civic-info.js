@@ -7,7 +7,7 @@ describe("CivicInfo", function() {
   describe("#settings", function () {
 
     it("exists as a public object on a CivicInfo instance", function () {
-      civicInfo = require("../civic-info")();
+      civicInfo = require("../lib/civic-info")();
       expect(typeof civicInfo.settings).to.eql("object");
     });
 
@@ -16,14 +16,14 @@ describe("CivicInfo", function() {
         var oldGoogleApiKey = process.env.GOOGLE_API_KEY;
         process.env.GOOGLE_API_KEY = "temporaryFakeKey";
 
-        civicInfo = require("../civic-info")();
+        civicInfo = require("../lib/civic-info")();
         expect(civicInfo.settings.apiKey).to.eql("temporaryFakeKey");
 
         process.env.GOOGLE_API_KEY = oldGoogleApiKey;
       });
       
       it("can be overridden on instantiation", function () {
-        civicInfo = require("../civic-info")({apiKey: "BLAH"});
+        civicInfo = require("../lib/civic-info")({apiKey: "BLAH"});
         expect(civicInfo.settings.apiKey).to.eql("BLAH");
       });
     });
@@ -31,12 +31,12 @@ describe("CivicInfo", function() {
 
   describe("#elections", function () {
     it("exists as a public method on a CivicInfo instance", function () {
-      civicInfo = require("../civic-info")();
+      civicInfo = require("../lib/civic-info")();
       expect(typeof civicInfo.elections).to.eql("function");
     });
 
     it("performs a get request to the proper Google civic info URL", function (done) {
-      civicInfo = require("../civic-info")({apiKey: "Foo"});
+      civicInfo = require("../lib/civic-info")({apiKey: "Foo"});
       var fakeResp = {"someKey": "someVal"};
 
       nock("https://www.googleapis.com")
@@ -52,12 +52,12 @@ describe("CivicInfo", function() {
   
   describe("#voterInfo", function () {
     it("exists as a public method on a CivicInfo instance", function () {
-      civicInfo = require("../civic-info")();
+      civicInfo = require("../lib/civic-info")();
       expect(typeof civicInfo.voterInfo).to.eql("function");
     });
 
     it("makes the properly formatted post to the Google Civic Info API with the options it's passed", function (done) {
-      civicInfo = require("../civic-info")({apiKey: "Foo"});
+      civicInfo = require("../lib/civic-info")({apiKey: "Foo"});
       var addr = "fakeAddress";
       var fakeResp = {"fakeKey":"fakeVal"};
 
@@ -73,7 +73,7 @@ describe("CivicInfo", function() {
 
     context("no electionID is specified in the options object it's passed", function () {
       it("defaults to an electionID of '4000'", function (done) {
-        civicInfo = require("../civic-info")({apiKey: "Foo"});
+        civicInfo = require("../lib/civic-info")({apiKey: "Foo"});
         var addr = "fakeAddress";
         var fakeResp = {"fakeKey":"fakeVal"};
 
@@ -90,7 +90,7 @@ describe("CivicInfo", function() {
 
     context("no address is specified in the options object it's passed", function () {
       it("throws an error", function (done) {
-        civicInfo = require("../civic-info")();
+        civicInfo = require("../lib/civic-info")();
         expect(function () {
           civicInfo.voterID({}, function(err, data) {});
         }).to.throwError();

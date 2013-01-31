@@ -4,13 +4,13 @@
   "homepage": "http://github.com/mdb/civic-info.js",
   "author": "Mike Ball",
   "version": "0.0.4",
-  "main": "./civic-info",
+  "main": "lib/civic-info",
   "repository": {
     "type": "git",
     "url": "http://github.com/mdb/civic-info.js.git"
   },
   "engines": {
-    "node": "0.8.10",
+    "node": "0.8.18",
     "npm": "1.1.x"
   },
   "dependencies": {
@@ -21,8 +21,9 @@
     "mocha": "*",
     "nock": "*",
     "expect.js": "*",
-    "grunt": ">=0.3.16",
-    "grunt-simple-mocha": ">=0.2.0"
+    "grunt": ">=0.4",
+    "grunt-simple-mocha": "0.3.2",
+    "grunt-contrib-jshint": ">=0.1"
   },
   "scripts": {
     "test": "grunt --verbose"
